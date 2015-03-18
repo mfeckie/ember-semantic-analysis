@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  semantic: Ember.inject.service(),
   testSentiment: function () {
-    console.log(this);
-    var sentimentAnalyser = this.container.lookup('service:semantic');
+    var sentimentAnalyser = this.get('semantic');
     return sentimentAnalyser.sentiment('abandon, worthy zealot!');
   }.property()
 });
