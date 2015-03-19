@@ -2495,8 +2495,27 @@ export default Ember.Service.extend({
       }
     }, 0);
   },
+  detailedSentiment: function(string) {
+    var words = this.words;
+    var wordArray = this.stripNonWords(string).split(' ');
+    var result = {positive: 0, negative: 0, count:0, posRatio: 0, negRatio: 0};
+    wordArray.forEach(function(word) {
+      result.count += 1;
+      if (words[word] !== undefined) {
+        var valence = words[word];
+        if (valence > 0) {
+          result.positive += 1;
+        } else if (valence < 0) {
+          result.negative += 1;
+        }
+      }
+    })
+    result.negRatio = (result.negative / result.count);
+    result.posRatio = (result.positive / result.count);
+    return result;
+  },
   stripNonWords: function(string) {
-    return string.replace(/\W+|_/g, ' ')
+    return string.toLowerCase().replace(/\W+|_/g, ' ')
                  .replace(/(\s{2,})/, ' ')
                  .trim();
   }

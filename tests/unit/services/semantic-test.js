@@ -3,12 +3,8 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('service:semantic', {
-  // Specify the other units that are required for this test.
-  // needs: ['service:foo']
-});
+moduleFor('service:semantic', {});
 
-// Replace this with your real tests.
 test('it exists', function(assert) {
   var service = this.subject();
   assert.ok(service);
@@ -41,4 +37,21 @@ test('with the words yucky yummy zealot returns -1', function(assert) {
   var service = this.subject();
   var testString = "yucky!yummy*zealot muggle";
   assert.equal(service.sentiment(testString), -1);
+});
+
+test('deals with mixed case', function (assert) {
+  var service = this.subject();
+  var testString = "Yucky!yUmmy*zealot muggle";
+  assert.equal(service.sentiment(testString), -1);
+});
+
+test('returns more detailed analysis', function(assert) {
+  var service = this.subject();
+  var testString = "Mr Dursley was furious when Harry made Aunt Marge float away!";
+  var result = service.detailedSentiment(testString);
+  assert.equal(result.positive, 0);
+  assert.equal(result.negative, 1);
+  assert.equal(result.count, 11);
+  assert.equal(result.negRatio, 0.09090909090909091);
+  assert.equal(result.posRatio, 0);
 });
