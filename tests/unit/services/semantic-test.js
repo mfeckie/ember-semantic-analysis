@@ -24,7 +24,7 @@ test('with the single word abandon returns -2', function(assert) {
 test('strips non-words and extra spaces from string', function(assert) {
   var service = this.subject();
   var testString = "abandon,    !@#$%^&*()_  \t\nthe.world!";
-  assert.equal(service.stripNonWords(testString), "abandon the world");
+  assert.equal(service._stripNonWords(testString), "abandon the world");
 });
 
 test('with the words abandon worth returns 0', function(assert) {
@@ -52,6 +52,6 @@ test('returns more detailed analysis', function(assert) {
   assert.equal(result.positive, 0);
   assert.equal(result.negative, 1);
   assert.equal(result.count, 11);
-  assert.equal(result.negRatio, 0.09090909090909091);
-  assert.equal(result.posRatio, 0);
+  assert.equal(result.negPercent, 0.09);
+  assert.equal(result.posPercent, 0);
 });

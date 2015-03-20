@@ -2486,7 +2486,7 @@ export default Ember.Service.extend({
   words: words,
   sentiment: function(string) {
     var words = this.words;
-    var wordArray = this.stripNonWords(string).split(' ');
+    var wordArray = this._stripNonWords(string).split(' ');
     return wordArray.reduce(function(previous, current){
       if (words[current] !== undefined) {
         return previous + words[current];
@@ -2497,8 +2497,8 @@ export default Ember.Service.extend({
   },
   detailedSentiment: function(string) {
     var words = this.words;
-    var wordArray = this.stripNonWords(string).split(' ');
-    var result = {positive: 0, negative: 0, count:0, posRatio: 0, negRatio: 0};
+    var wordArray = this._stripNonWords(string).split(' ');
+    var result = {positive: 0, negative: 0, count:0, posPercent: 0, negPercent: 0};
     wordArray.forEach(function(word) {
       result.count += 1;
       if (words[word] !== undefined) {
@@ -2510,11 +2510,11 @@ export default Ember.Service.extend({
         }
       }
     })
-    result.negRatio = (result.negative / result.count);
-    result.posRatio = (result.positive / result.count);
+    result.negPercent = Math.round((result.negative / result.count) * 100) / 100;
+    result.posPercent = Math.round((result.positive / result.count) * 100) / 100;
     return result;
   },
-  stripNonWords: function(string) {
+  _stripNonWords: function(string) {
     return string.toLowerCase().replace(/\W+|_/g, ' ')
                  .replace(/(\s{2,})/, ' ')
                  .trim();
