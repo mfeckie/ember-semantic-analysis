@@ -49,9 +49,11 @@ test('returns more detailed analysis', function(assert) {
   var service = this.subject();
   var testString = "Mr Dursley was furious when Harry made Aunt Marge float away!";
   var result = service.detailedSentiment(testString);
-  assert.equal(result.positive, 0);
-  assert.equal(result.negative, 1);
-  assert.equal(result.count, 11);
-  assert.equal(result.negPercent, 0.09);
-  assert.equal(result.posPercent, 0);
+  assert.deepEqual(result,{
+    positive: 0,
+    negative: 1,
+    count: 11,
+    negPercent: 0.09,
+    posPercent: 0
+  });
 });
