@@ -1,3 +1,5 @@
+[ ![Codeship Status for mfeckie/ember-semantic-analysis](https://codeship.com/projects/a8a03080-ef3b-0132-c36d-3628cb5d23b0/status?branch=master)](https://codeship.com/projects/84322)
+
 # Ember-semantic-analysis
 
 Sentiment analysis on the fly.  The word list is from [AFIN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010).  Only English language is supported.
